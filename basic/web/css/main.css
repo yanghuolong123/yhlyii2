@@ -1,0 +1,14 @@
+.navbar-brand {
+    padding: 2px;
+}
+
+img.qqcode {
+    width: 300px;
+    height: 300px;
+}
+
+.col-lg-4 {
+    float: left;
+    padding-left: 15px;
+    padding-right: 5px;
+}

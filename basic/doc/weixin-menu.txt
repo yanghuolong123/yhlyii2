@@ -1,0 +1,22 @@
+{
+     "button":[
+     {	
+          "type":"view",
+          "name":"首页",
+          "url":"http://www.womem.cn"
+      },
+      {
+           "name":"服务",
+           "sub_button":[
+           {	
+               "type":"click",
+               "name":"星座",
+               "key":"MCCTV_RELATIVE_LOCATE"
+            },
+            {
+               "type":"click",
+               "name":"彩票",
+               "key":"MCCTV_MONITOR_ALARM"
+            }]
+       }]
+ }
