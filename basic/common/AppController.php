@@ -12,7 +12,8 @@ class AppController extends Controller {
         if (Yii::$app->user->isGuest && isset($_COOKIE['0r1K_e4b6_auth'])) {
             $auth = $_COOKIE['0r1K_e4b6_auth'];
             $decode = authcode($auth);
-            $uid = intval(substr($decode, 33));            
+            $uid = intval(substr($decode, 33));
+            var_dump($auth, $decode, $uid);die;
             if ($uid) {
                 Yii::$app->user->login(Member::findUserById($uid), 3600 * 24 * 30);
             }
