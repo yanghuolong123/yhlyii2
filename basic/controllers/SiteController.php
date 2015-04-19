@@ -60,7 +60,7 @@ class SiteController extends AppController {
             return $this->goHome();
         }
 
-        return Yii::$app->getResponse()->redirect('http://bbs.womem.cn/member.php?mod=logging&action=login');
+        return Yii::$app->getResponse()->redirect('http://bbs.feichangjuzu.com/member.php?mod=logging&action=login');
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
