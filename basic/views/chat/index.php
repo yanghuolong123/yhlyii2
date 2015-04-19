@@ -105,7 +105,7 @@ $baseUrl = \Yii::$app->request->baseUrl;
         function getRequest() {     
             var theRequest = new Object();     
             theRequest['name'] = '<?= \Yii::$app->user->identity->username ?>';
-            theRequest['avatar'] = 'http://bbs.womem.cn/uc_server/avatar.php?uid=<?= \Yii::$app->user->identity->id ?>&size=small';
+            theRequest['avatar'] = 'http://bbs.feichangjuzu.com/uc_server/avatar.php?uid=<?= \Yii::$app->user->identity->id ?>&size=small';
    
             return theRequest;
         }
