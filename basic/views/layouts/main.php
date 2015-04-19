@@ -39,11 +39,11 @@ AppAsset::register($this);
                     ['label' => '关于我', 'url' => ['/site/about']],
                     ['label' => '联系我', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
-                        ['label' => '登录', 'url' => 'http://bbs.womem.cn/member.php?mod=logging&action=login'] :
+                        ['label' => '登录', 'url' => 'http://bbs.feichangjuzu.com/member.php?mod=logging&action=login'] :
                         ['label' => '退出 (' . Yii::$app->user->identity->username . ')',
-                            'url' => 'http://bbs.womem.cn/member.php?mod=logging&action=logout&formhash='.  formhash(),
+                            'url' => 'http://bbs.feichangjuzu.com/member.php?mod=logging&action=logout&formhash='.  formhash(),
                             'linkOptions' => ['data-method' => 'post']],
-                    Yii::$app->user->isGuest ? ['label'=>'注册', 'url'=>'http://bbs.womem.cn/member.php?mod=register'] : '',
+                    Yii::$app->user->isGuest ? ['label'=>'注册', 'url'=>'http://bbs.feichangjuzu.com/member.php?mod=register'] : '',
                 ],
             ]);
             NavBar::end();
