@@ -43,6 +43,7 @@ function listenEvent() {
         //发送登录信息
         msg = new Object();
         msg.cmd = 'login';
+        msg.uid = uid;
         msg.name = GET['name'];
         msg.avatar = GET['avatar'];
         ws.send($.toJSON(msg));
