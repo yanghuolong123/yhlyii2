@@ -312,6 +312,7 @@ function sendMsg() {
 
     if ($('#userlist').val() == 0) {
         msg.cmd = 'message';
+        msg.uid = uid;
         msg.from = client_id;
         msg.channal = 0;
         msg.data = content;
