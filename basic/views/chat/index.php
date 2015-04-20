@@ -102,11 +102,12 @@ $baseUrl = \Yii::$app->request->baseUrl;
 </div>
     
 <script>
+        var uid = '<?= \Yii::$app->user->identity->id ?>';
         function getRequest() {     
             var theRequest = new Object();     
             theRequest['name'] = '<?= \Yii::$app->user->identity->username ?>';
             theRequest['avatar'] = 'http://bbs.feichangjuzu.com/uc_server/avatar.php?uid=<?= \Yii::$app->user->identity->id ?>&size=small';
-            theRequest['uid'] = '<?= \Yii::$app->user->identity->id ?>';
+            theRequest['uid'] = uid;
    
             return theRequest;
         }
