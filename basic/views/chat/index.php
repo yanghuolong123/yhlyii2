@@ -103,7 +103,7 @@ $baseUrl = \Yii::$app->request->baseUrl;
     
 <script>
         var uid = '<?= \Yii::$app->user->identity->id ?>';
-        function getRequest() {     
+        function getRequest() {     alert(uid);
             var theRequest = new Object();     
             theRequest['name'] = '<?= \Yii::$app->user->identity->username ?>';
             theRequest['avatar'] = 'http://bbs.feichangjuzu.com/uc_server/avatar.php?uid=<?= \Yii::$app->user->identity->id ?>&size=small';
