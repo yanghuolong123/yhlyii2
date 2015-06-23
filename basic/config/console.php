@@ -4,6 +4,7 @@ Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
+$mongo = require(__DIR__.'/mongo.php');
 
 return [
     'id' => 'basic-console',
@@ -26,6 +27,7 @@ return [
             ],
         ],
         'db' => $db,
+        'mongo' => $mongo,
     ],
     'params' => $params,
 ];

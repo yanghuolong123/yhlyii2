@@ -1,0 +1,1 @@
+/var/work/work_php/yhlwork/yhlyii2/basic/yii weixin/import /var/work/work_bash/work/lottery/lottery.txt
