@@ -59,20 +59,24 @@ class WeixinController extends Controller {
 
     // 彩票
     public function lottery(&$data) {
-        if (isset($data['Content'])) {
-            switch ($data['Content']) {
-                case '双色球':
-                    $redball = array_rand(range(1, 33), 6);
-                    $msgArr['ToUserName'] = $data['FromUserName'];
-                    $msgArr['FromUserName'] = $data['ToUserName'];
-                    $msgArr['CreateTime'] = time();
-                    $msgArr['MsgType'] = 'text';
-                    $msgArr['Content'] = implode(', ', $redball) . '   ' . mt_rand(1, 16);
-                    $this->sendMsg($msgArr);
-                    break;
-                default :
-                    break;
+        if (isset($data['Content']) && ($data['Content'] != '双色球')) {
+            $green = $red = [];
+            $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
+            foreach ($listsData as &$list) {
+                unset($list['_id']);
+                $green[$list['green']] ++;
+                foreach ($list['red'] as $r) {
+                    $red[$r] ++;
+                }
             }
+            rsort($red);
+
+            $msgArr['ToUserName'] = $data['FromUserName'];
+            $msgArr['FromUserName'] = $data['ToUserName'];
+            $msgArr['CreateTime'] = time();
+            $msgArr['MsgType'] = 'text';
+            $msgArr['Content'] = implode(', ', array_slice($red, 0, 6)) . '   ' . max($green);
+            $this->sendMsg($msgArr);
         }
     }
 
