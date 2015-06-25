@@ -64,18 +64,21 @@ class WeixinController extends Controller {
             $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
             foreach ($listsData as &$list) {
                 unset($list['_id']);
-                $green[$list['green']] ++;
+                $green[$list['green']] = isset($green[$list['green']]) ? $green[$list['green']] + 1 : 1;
                 foreach ($list['red'] as $r) {
-                    $red[$r] ++;
+                    $red[$r] = isset($red[$r]) ? $red[$r] + 1 : 1;
                 }
             }
-            rsort($red);
+            arsort($green);
+            arsort($red);
+            $red = array_keys(array_slice($red, 0, 6, true));
+            sort($red);
 
             $msgArr['ToUserName'] = $data['FromUserName'];
             $msgArr['FromUserName'] = $data['ToUserName'];
             $msgArr['CreateTime'] = time();
             $msgArr['MsgType'] = 'text';
-            $msgArr['Content'] = implode(', ', array_slice($red, 0, 6)) . '   ' . max($green);
+            $msgArr['Content'] = implode(', ', $red) . '   ' . key($green);
             $this->sendMsg($msgArr);
         }
     }
@@ -144,14 +147,24 @@ class WeixinController extends Controller {
         return $arr;
     }
 
-    public function actionCreateMenu() {
-        $url = $this->api_url . '/cgi-bin/menu/create?access_token=' . $this->accessToken;
-        $menu = json_decode(file_get_contents(Yii::$app->basePath . '/doc/weixin-menu.txt'), true);
-        $menu = $this->urlencodeArr($menu);
-        $data = curl_post($url, urldecode(json_encode($menu)));
+    public function actionTest() {
+        $green = $red = [];
+        $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
+        foreach ($listsData as &$list) {
+            unset($list['_id']);
+            $green[$list['green']] = isset($green[$list['green']]) ? $green[$list['green']] + 1 : 1;
+            foreach ($list['red'] as $r) {
+                $red[$r] = isset($red[$r]) ? $red[$r] + 1 : 1;
+            }
+        }
+        arsort($green);
+        arsort($red);
+        $red = array_keys(array_slice($red, 0, 6, true));
+        sort($red);
         echo '<pre>';
-        var_dump($data);
+        var_dump($green);
         echo '</pre>';
+        echo implode(', ', $red) . '   ' . key($green);
     }
 
 }
