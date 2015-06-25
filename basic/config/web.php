@@ -48,6 +48,7 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'mongo' => require(__DIR__ . '/mongo.php'),
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
