@@ -13,7 +13,9 @@ class Mongo extends Component {
 
     public function init() {
         parent::init();
-        $this->_mongo = new \MongoClient("mongodb://" . $this->host . ':' . $this->port);
+        if (empty($this->_mongo)) {
+            $this->_mongo = new \MongoClient("mongodb://" . $this->host . ':' . $this->port);
+        }
     }
 
     public function getDB() {
