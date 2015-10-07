@@ -87,7 +87,7 @@ function listenEvent() {
         }
         else if (cmd == 'logout') {
             ws.send($.toJSON({cmd : 'getOnline'}));
-            ws.send($.toJSON({cmd : 'getHistory'}));
+            //ws.send($.toJSON({cmd : 'getHistory'}));
         }
     };
 
