@@ -85,6 +85,10 @@ function listenEvent() {
             delUser(cid);
             showNewMsg(message);
         }
+        else if (cmd == 'logout') {
+            ws.send($.toJSON({cmd : 'getOnline'}));
+            ws.send($.toJSON({cmd : 'getHistory'}));
+        }
     };
 
     /**
