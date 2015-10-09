@@ -191,6 +191,6 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 }
 
 function formhash($specialadd = '') { 
-    $authkey = md5('bb6cf8rLXvtreJbC' . (isset($_COOKIE['0r1K_e4b6_saltkey']) ? $_COOKIE['0r1K_e4b6_saltkey'] : ''));
+    $authkey = md5('bb6cf8rLXvtreJbC' . (isset($_COOKIE['0r1K_b2e7_saltkey']) ? $_COOKIE['0r1K_b2e7_saltkey'] : ''));
     return substr(md5(substr(TIMESTAMP, 0, -7) . Yii::$app->user->identity->username . Yii::$app->user->identity->id . $authkey . $specialadd), 8, 8);
 }
