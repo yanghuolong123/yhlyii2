@@ -9,8 +9,8 @@ use app\models\Member;
 class AppController extends Controller {
 
     public function beforeAction($action) {
-        if (Yii::$app->user->isGuest && isset($_COOKIE['0r1K_e4b6_auth'])) {
-            $auth = $_COOKIE['0r1K_e4b6_auth'];
+        if (Yii::$app->user->isGuest && isset($_COOKIE['0r1K_b2e7_auth'])) {
+            $auth = $_COOKIE['0r1K_b2e7_auth'];
             $decode = authcode($auth);
             $uid = intval(substr($decode, 33));
             if ($uid) {
@@ -18,7 +18,7 @@ class AppController extends Controller {
             }
         }
 
-        if (!Yii::$app->user->isGuest && !isset($_COOKIE['0r1K_e4b6_auth'])) {
+        if (!Yii::$app->user->isGuest && !isset($_COOKIE['0r1K_b2e7_auth'])) {
             Yii::$app->user->logout();
         }
 
