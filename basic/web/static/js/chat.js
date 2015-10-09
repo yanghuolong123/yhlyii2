@@ -97,7 +97,7 @@ function listenEvent() {
     ws.onclose = function (e) {
        // if (confirm("聊天服务器已关闭")) {
             //alert('您已退出聊天室');
-            location.href = 'http://home.feichangjuzu.com';
+            location.href = 'http://home.womem.cn';
         //}
     };
 
