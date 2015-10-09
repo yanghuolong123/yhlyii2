@@ -1,3 +1,3 @@
 var webim = {
-    'server' : 'ws://im.feichangjuzu.com:9500'
+    'server' : 'ws://im.womem.cn:9500'
 }
