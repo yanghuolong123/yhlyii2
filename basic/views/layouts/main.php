@@ -61,7 +61,6 @@ AppAsset::register($this);
     <footer class="footer">
         <div class="container">
             <p class="pull-left">&copy; 远古神龙 <?= date('Y') ?> (<a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备15051718号</a>)</p>
-            <p class="pull-right">Powered by <a href="">远古神龙</a></p>
         </div>
     </footer>
 
