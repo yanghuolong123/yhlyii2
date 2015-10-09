@@ -11,6 +11,7 @@ class AppController extends Controller {
     public function beforeAction($action) {
         if (Yii::$app->user->isGuest && isset($_COOKIE['0r1K_b2e7_auth'])) {
             $auth = $_COOKIE['0r1K_b2e7_auth'];
+            var_dump($auth);die;
             $decode = authcode($auth);
             var_dump($decode);die;
             $uid = intval(substr($decode, 33));
