@@ -4,6 +4,7 @@
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 defined('TIMESTAMP') or define('TIMESTAMP', time());
 defined('DATETIME') or define('DATETIME', date('Y-m-d H:i:s', TIMESTAMP));
+defined('USE_KEY') or define('USE_KEY', 'b2e7');
 
 /**
  * 验证$_GET参数是否存在
@@ -144,7 +145,7 @@ function curl_get($url = '', $options = array()) {
 
 function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
     $ckey_length = 4;
-    $key = md5($key != '' ? $key : md5('bb6cf8rLXvtreJbC' . (isset($_COOKIE['0r1K_b2e7_saltkey']) ? $_COOKIE['0r1K_b2e7_saltkey'] : '')));
+    $key = md5($key != '' ? $key : md5('bb6cf8rLXvtreJbC' . (isset($_COOKIE['0r1K_'.USE_KEY.'_saltkey']) ? $_COOKIE['0r1K_'.USE_KEY.'_saltkey'] : '')));
     $keya = md5(substr($key, 0, 16));
     $keyb = md5(substr($key, 16, 16));
     $keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length) : substr(md5(microtime()), -$ckey_length)) : '';
@@ -191,6 +192,6 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 }
 
 function formhash($specialadd = '') { 
-    $authkey = md5('bb6cf8rLXvtreJbC' . (isset($_COOKIE['0r1K_b2e7_saltkey']) ? $_COOKIE['0r1K_b2e7_saltkey'] : ''));
+    $authkey = md5('bb6cf8rLXvtreJbC' . (isset($_COOKIE['0r1K_'.USE_KEY.'_saltkey']) ? $_COOKIE['0r1K_'.USE_KEY.'_saltkey'] : ''));
     return substr(md5(substr(TIMESTAMP, 0, -7) . Yii::$app->user->identity->username . Yii::$app->user->identity->id . $authkey . $specialadd), 8, 8);
 }
