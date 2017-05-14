@@ -61,19 +61,20 @@ class WeixinController extends Controller {
     public function lottery(&$data) {
         logs('wx', var_export($data, true));
         if (isset($data['Content']) && ($data['Content'] == '双色球')) {
-            $green = $red = [];
-            $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
-            foreach ($listsData as &$list) {
-                unset($list['_id']);
-                $green[$list['green']] = isset($green[$list['green']]) ? $green[$list['green']] + 1 : 1;
-                foreach ($list['red'] as $r) {
-                    $red[$r] = isset($red[$r]) ? $red[$r] + 1 : 1;
-                }
-            }
-            arsort($green);
-            arsort($red);
-            $red = array_keys(array_slice($red, 0, 6, true));
-            sort($red);
+            $green = $red = [1, 2];
+//            $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
+//            foreach ($listsData as &$list) {
+//                unset($list['_id']);
+//                $green[$list['green']] = isset($green[$list['green']]) ? $green[$list['green']] + 1 : 1;
+//                foreach ($list['red'] as $r) {
+//                    $red[$r] = isset($red[$r]) ? $red[$r] + 1 : 1;
+//                }
+//            }
+//            arsort($green);
+//            arsort($red);
+//            
+//            $red = array_keys(array_slice($red, 0, 6, true));
+//            sort($red);
 
             $msgArr['ToUserName'] = $data['FromUserName'];
             $msgArr['FromUserName'] = $data['ToUserName'];
