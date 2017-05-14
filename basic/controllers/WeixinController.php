@@ -59,6 +59,7 @@ class WeixinController extends Controller {
 
     // 彩票
     public function lottery(&$data) {
+        logs('wx', var_export($data));
         if (isset($data['Content']) && ($data['Content'] == '双色球')) {
             $green = $red = [];
             $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
