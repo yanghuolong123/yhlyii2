@@ -7,9 +7,15 @@ use yii\web\Controller;
 
 class WeixinController extends Controller {
 
-    public $token = 'yanghuolonghebingbing123';
-    public $appid = 'wxa2d2cc7d8b460302';
-    public $secret = 'f36da1173c0a891fdac60da21cbb7c06';
+//    public $token = 'yanghuolonghebingbing123';
+//    public $appid = 'wxa2d2cc7d8b460302';
+//    public $secret = 'f36da1173c0a891fdac60da21cbb7c06';
+//    public $api_url = 'https://api.weixin.qq.com';
+//    private $_accessToken;
+    
+    public $token = 'feichangjuzu123456';
+    public $appid = 'wx2705fb0b58b923b6';
+    public $secret = '63b572bc483358797be65ea66b156290';
     public $api_url = 'https://api.weixin.qq.com';
     private $_accessToken;
 
