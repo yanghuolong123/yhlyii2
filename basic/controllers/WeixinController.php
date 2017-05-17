@@ -12,12 +12,6 @@ class WeixinController extends Controller {
     public $secret = 'f36da1173c0a891fdac60da21cbb7c06';
     public $api_url = 'https://api.weixin.qq.com';
     private $_accessToken;
-    
-//    public $token = 'feichangjuzu123456';
-//    public $appid = 'wx2705fb0b58b923b6';
-//    public $secret = '63b572bc483358797be65ea66b156290';
-//    public $api_url = 'https://api.weixin.qq.com';
-//    private $_accessToken;
 
     public function actionIndex() {
         list($echostr) = validParams(array('echostr'));
@@ -67,6 +61,7 @@ class WeixinController extends Controller {
     public function lottery(&$data) {
         logs('wx', var_export($data, true));
         if (isset($data['Content']) && ($data['Content'] == '双色球')) {
+
             $green = $red = [1, 2];
 //            $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
 //            foreach ($listsData as &$list) {
@@ -82,11 +77,23 @@ class WeixinController extends Controller {
 //            $red = array_keys(array_slice($red, 0, 6, true));
 //            sort($red);
 
+            $green = $red = [];
+            $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
+            foreach ($listsData as &$list) {
+                unset($list['_id']);
+                $green[$list['green']] ++;
+                foreach ($list['red'] as $r) {
+                    $red[$r] ++;
+                }
+            }
+            rsort($red);
+
+
             $msgArr['ToUserName'] = $data['FromUserName'];
             $msgArr['FromUserName'] = $data['ToUserName'];
             $msgArr['CreateTime'] = time();
             $msgArr['MsgType'] = 'text';
-            $msgArr['Content'] = implode(', ', $red) . '   ' . key($green);
+            $msgArr['Content'] = implode(', ', array_slice($red, 0, 6)) . '   ' . max($green);
             $this->sendMsg($msgArr);
         }
     }
@@ -155,24 +162,14 @@ class WeixinController extends Controller {
         return $arr;
     }
 
-    public function actionTest() {
-        $green = $red = [];
-        $listsData = iterator_to_array(Yii::$app->mongo->selectCollection('lottery')->find()->sort(array('issue' => -1)), false);
-        foreach ($listsData as &$list) {
-            unset($list['_id']);
-            $green[$list['green']] = isset($green[$list['green']]) ? $green[$list['green']] + 1 : 1;
-            foreach ($list['red'] as $r) {
-                $red[$r] = isset($red[$r]) ? $red[$r] + 1 : 1;
-            }
-        }
-        arsort($green);
-        arsort($red);
-        $red = array_keys(array_slice($red, 0, 6, true));
-        sort($red);
+    public function actionCreateMenu() {
+        $url = $this->api_url . '/cgi-bin/menu/create?access_token=' . $this->accessToken;
+        $menu = json_decode(file_get_contents(Yii::$app->basePath . '/doc/weixin-menu.txt'), true);
+        $menu = $this->urlencodeArr($menu);
+        $data = curl_post($url, urldecode(json_encode($menu)));
         echo '<pre>';
-        var_dump($green);
+        var_dump($data);
         echo '</pre>';
-        echo implode(', ', $red) . '   ' . key($green);
     }
 
 }
